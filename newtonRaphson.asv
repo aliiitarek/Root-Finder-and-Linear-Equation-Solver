@@ -1,0 +1,26 @@
+function [newton,iter,pre]  = newtonRaphson(f, x0, es, imax)
+    xi=x0;
+    h=0.1;
+    i=0;
+    for i=1:1:imax
+        
+        dervF=(-1*f(xi+2*h)+8*f(xi+h)-8*f(xi-h)+f(xi-2*h))/(12*h);
+        if(dervF==0)
+            s=sprintf('failed to find root, derivative =0 \n last x was %d\n',xi);
+            disp(s);
+            break;
+        end;
+        xii=xi-(f(xi))/(dervF);
+        ea = abs((xii-xi)/xii);
+        
+        if (ea < es)
+            break;
+        end
+        
+        xi=xii;
+        
+    end
+newton=xi;
+iter=i;
+pre=f(xi);
+X=Y;

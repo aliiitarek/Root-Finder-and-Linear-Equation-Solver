@@ -1,0 +1,28 @@
+
+function [root,iter,pre] = bisection(f, xl, xu, es, imax)
+    xr=0;
+    
+    i=0;
+    for i=1:1:imax
+        
+        xr=(xu+xl)/2;           % compute the midpoint xr
+        ea = abs((xu-xl)/xl);   % approx. relative error
+        test= f(xl) * f(xr);    % compute f(xl)*f(xr)
+        
+        if (test < 0) 
+            xu=xr;
+        else
+            xl=xr;
+        end
+        
+        if (test == 0) 
+            ea=0; 
+        end
+        
+        if (ea < es)
+            break;
+        end
+    end
+    root=xr;
+    iter=i;
+    pre=f(x);
